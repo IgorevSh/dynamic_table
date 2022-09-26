@@ -1,5 +1,5 @@
 <template>
-  <div v-if="pages > 1" class="pagination_wrapper">
+  <div v-if="pagesCount > 1" class="pagination_wrapper">
     <button
       class="pagination_button"
       :disabled="currentPage == 0 ? true : false"
@@ -20,8 +20,8 @@
     </div>
     <button
       class="pagination_button"
-      :disabled="currentPage == pages - 1 ? true : false"
-      :class="{ disabled: currentPage == pages - 1 }"
+      :disabled="currentPage == pagesCount - 1 ? true : false"
+      :class="{ disabled: currentPage == pagesCount - 1 }"
       @click="shiftOffset('right')"
     >
       ❯
@@ -47,13 +47,13 @@ export default {
     };
   },
   computed: {
-    pages() {
+    pagesCount() {
       return Math.ceil(this.rows / this.pageLimit);
     },
     pageRange() {
       return this.createRange(
         Math.floor(this.currentPage / this.shift) * this.shift,
-        this.pages - 1
+        this.pagesCount - 1
       ).splice(0, this.shift);
     },
   },
@@ -75,7 +75,7 @@ export default {
       if (direction == "left" && this.currentPage > 0) {
         this.currentPage--;
       }
-      if (direction == "right" && this.currentPage < this.pages - 1) {
+      if (direction == "right" && this.currentPage < this.pagesCount - 1) {
         this.currentPage++;
       }
     },

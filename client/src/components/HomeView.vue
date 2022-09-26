@@ -1,6 +1,6 @@
 <template>
   <table-component
-    :headers="names"
+    :headers="headers"
     :limits="limitOptions"
     :rows="rowsCount"
     :table-body="fixedTableBody"
@@ -27,7 +27,7 @@ export default {
   components: { TableComponent },
   data() {
     return {
-      names: {
+      headers: {
         name: { label: "Имя", sort: true, state: null },
         distance: { label: "Дистанция", sort: true, state: null },
         amount: { label: "Количество", sort: true, state: null },
@@ -37,9 +37,9 @@ export default {
       limitOptions: [5, 10, 20],
       defaultLimit: 10,
       rowsCount: 0,
-      name: "",
+     /* name: "",
       amount: null,
-      distance: null,
+      distance: null,*/
     };
   },
   async created() {
@@ -63,7 +63,7 @@ export default {
       this.tableBody = await TableModel.getRows(params);
       this.rowsCount = this.tableBody.data.count;
     },
-    async saveField() {
+  /*  async saveField() {
       await TableModel.addRow({
         name: this.name,
         amount: this.amount,
@@ -71,7 +71,7 @@ export default {
         data: Date.now(),
       });
       await this.$refs.table.updateTable();
-    },
+    },*/
   },
 };
 </script>
